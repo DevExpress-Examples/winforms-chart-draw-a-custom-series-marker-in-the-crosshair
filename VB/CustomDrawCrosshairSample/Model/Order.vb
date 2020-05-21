@@ -6,18 +6,18 @@ Imports System
 
 Namespace CustomDrawCrosshairSample.Model
 
-    Partial Public Class Order
-        Public Property OrderID() As Integer
+	Partial Public Class Order
+		Public Property OrderID() As Integer
 
-        <Column("EmployeeId")> _
-        Public Property EmployeeId() As Integer?
+		<Column("EmployeeId")>
+		Public Property EmployeeId() As Integer?
 
-        <Column(TypeName := "datetime")> _
-        Public Property OrderDate() As Date
+		<Column(TypeName := "datetime")>
+		Public Property OrderDate() As DateTime
 
-        Public Property Freight() As Decimal?
+		Public Property Freight() As Decimal?
 
-        <ForeignKey("EmployeeId")> _
-        Public Overridable Property Employee() As Employee
-    End Class
+		<ForeignKey("EmployeeId")>
+		Public Overridable Property Employee() As Employee
+	End Class
 End Namespace
