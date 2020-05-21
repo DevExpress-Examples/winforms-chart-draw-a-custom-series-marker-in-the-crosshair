@@ -8,9 +8,9 @@ using System.Linq;
 using System.Windows.Forms;
 
 namespace CustomDrawCrosshairSample {
-    public partial class Form1 : Form {
+    public partial class Form1 : DevExpress.XtraEditors.XtraForm {
         Dictionary<string, Image> photoCache = new Dictionary<string, Image>();
-
+        Dictionary<string, Bitmap> bitmapCache = new Dictionary<string, Bitmap>();
         #region #Constants
         const int borderSize = 2;
         const int scaledPhotoWidth = 32;
@@ -54,9 +54,10 @@ namespace CustomDrawCrosshairSample {
         void InitPhotoCache(IEnumerable<Employee> employees) {
             photoCache.Clear();
             foreach (var employee in employees) {
-                MemoryStream stream = new MemoryStream(employee.Photo);
-                if (!photoCache.ContainsKey(employee.FullName))
-                    photoCache.Add(employee.FullName, Image.FromStream(stream));
+                using (MemoryStream stream = new MemoryStream(employee.Photo)) {
+                    if (!photoCache.ContainsKey(employee.FullName))
+                        photoCache.Add(employee.FullName, Image.FromStream(stream));
+                }
             }
         }
 
@@ -66,12 +67,18 @@ namespace CustomDrawCrosshairSample {
                 if (group.CrosshairElements[0] != null)
                     group.HeaderElement.Text = String.Format("Sales in {0:yyyy}", group.CrosshairElements[0].SeriesPoint.DateTimeArgument);
                 foreach (CrosshairElement element in group.CrosshairElements) {
-                    Bitmap image = new Bitmap(totalWidth, totalHeight);
-                    using (Graphics graphics = Graphics.FromImage(image)) {
-                        graphics.FillRectangle(new SolidBrush(element.LabelElement.MarkerColor), totalRect);
-                        Image photo;
-                        if (photoCache.TryGetValue(element.Series.Name, out photo))
-                            graphics.DrawImage(photo, photoRect);
+                    Bitmap image;
+                    if (!bitmapCache.TryGetValue(element.Series.Name, out image)) {
+                        image = new Bitmap(totalWidth, totalHeight);
+                        using (Graphics graphics = Graphics.FromImage(image)) {
+                            using (SolidBrush brush = new SolidBrush(element.LabelElement.MarkerColor)) {
+                                graphics.FillRectangle(brush, totalRect);
+                            }
+                            Image photo;
+                            if (photoCache.TryGetValue(element.Series.Name, out photo))
+                                graphics.DrawImage(photo, photoRect);
+                        }
+                        bitmapCache.Add(element.Series.Name, image);
                     }
                     element.LabelElement.MarkerImage = image;
                     element.LabelElement.MarkerSize = new Size(totalWidth, totalHeight);
