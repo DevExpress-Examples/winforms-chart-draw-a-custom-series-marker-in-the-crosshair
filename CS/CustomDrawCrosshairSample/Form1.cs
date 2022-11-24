@@ -1,16 +1,17 @@
 ﻿using CustomDrawCrosshairSample.Model;
+using DevExpress.Drawing;
 using DevExpress.XtraCharts;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Windows.Forms;
 
-namespace CustomDrawCrosshairSample {
+namespace CustomDrawCrosshairSample
+{
     public partial class Form1 : DevExpress.XtraEditors.XtraForm {
-        Dictionary<string, Image> photoCache = new Dictionary<string, Image>();
-        Dictionary<string, Bitmap> bitmapCache = new Dictionary<string, Bitmap>();
+        Dictionary<string, DXImage> photoCache = new Dictionary<string, DXImage>();
+        Dictionary<string, DXBitmap> bitmapCache = new Dictionary<string, DXBitmap>();
         #region #Constants
         const int borderSize = 2;
         const int scaledPhotoWidth = 32;
@@ -56,7 +57,7 @@ namespace CustomDrawCrosshairSample {
             foreach (var employee in employees) {
                 using (MemoryStream stream = new MemoryStream(employee.Photo)) {
                     if (!photoCache.ContainsKey(employee.FullName))
-                        photoCache.Add(employee.FullName, Image.FromStream(stream));
+                        photoCache.Add(employee.FullName, DXImage.FromStream(stream));
                 }
             }
         }
@@ -67,20 +68,20 @@ namespace CustomDrawCrosshairSample {
                 if (group.CrosshairElements[0] != null)
                     group.HeaderElement.Text = String.Format("Sales in {0:yyyy}", group.CrosshairElements[0].SeriesPoint.DateTimeArgument);
                 foreach (CrosshairElement element in group.CrosshairElements) {
-                    Bitmap image;
+                    DXBitmap image;
                     if (!bitmapCache.TryGetValue(element.Series.Name, out image)) {
-                        image = new Bitmap(totalWidth, totalHeight);
-                        using (Graphics graphics = Graphics.FromImage(image)) {
-                            using (SolidBrush brush = new SolidBrush(element.LabelElement.MarkerColor)) {
+                        image = new DXBitmap(totalWidth, totalHeight);
+                        using (DXGraphics graphics = DXGraphics.FromImage(image)) {
+                            using (DXSolidBrush brush = new DXSolidBrush(element.LabelElement.MarkerColor)) {
                                 graphics.FillRectangle(brush, totalRect);
                             }
-                            Image photo;
+                            DXImage photo;
                             if (photoCache.TryGetValue(element.Series.Name, out photo))
                                 graphics.DrawImage(photo, photoRect);
                         }
                         bitmapCache.Add(element.Series.Name, image);
                     }
-                    element.LabelElement.MarkerImage = image;
+                    element.LabelElement.DXMarkerImage = image;
                     element.LabelElement.MarkerSize = new Size(totalWidth, totalHeight);
                 }
             }
