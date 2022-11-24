@@ -1,23 +1,21 @@
-﻿Imports System.Data.Entity.Spatial
-Imports System.ComponentModel.DataAnnotations.Schema
 Imports System.ComponentModel.DataAnnotations
-Imports System.Collections.Generic
-Imports System
+Imports System.ComponentModel.DataAnnotations.Schema
 
 Namespace CustomDrawCrosshairSample.Model
 
-    Partial Public Class Order
-        Public Property OrderID() As Integer
+    Public Partial Class Order
 
-        <Column("EmployeeId")> _
-        Public Property EmployeeId() As Integer?
+        Public Property OrderID As Integer
 
-        <Column(TypeName := "datetime")> _
-        Public Property OrderDate() As Date
+        <Column("EmployeeId")>
+        Public Property EmployeeId As Integer?
 
-        Public Property Freight() As Decimal?
+        <Column(TypeName:="datetime")>
+        Public Property OrderDate As Date
 
-        <ForeignKey("EmployeeId")> _
-        Public Overridable Property Employee() As Employee
+        Public Property Freight As Decimal?
+
+        <ForeignKey("EmployeeId")>
+        Public Overridable Property Employee As Employee
     End Class
 End Namespace
