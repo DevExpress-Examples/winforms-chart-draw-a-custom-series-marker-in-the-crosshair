@@ -7,8 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 
-namespace CustomDrawCrosshairSample
-{
+namespace CustomDrawCrosshairSample {
     public partial class Form1 : DevExpress.XtraEditors.XtraForm {
         Dictionary<string, DXImage> photoCache = new Dictionary<string, DXImage>();
         Dictionary<string, DXBitmap> bitmapCache = new Dictionary<string, DXBitmap>();
