@@ -1,22 +1,20 @@
-﻿Imports System.Linq
-Imports System.ComponentModel.DataAnnotations.Schema
 Imports System.Data.Entity
-Imports System
+Imports System.ComponentModel.DataAnnotations.Schema
 
 Namespace CustomDrawCrosshairSample.Model
 
-	Partial Public Class NwindDbContext
-		Inherits DbContext
+    Public Partial Class NwindDbContext
+        Inherits DbContext
 
-		Public Sub New()
-			MyBase.New("name=NwindDbContext")
-		End Sub
+        Public Sub New()
+            MyBase.New("name=NwindDbContext")
+        End Sub
 
-		Public Overridable Property Employees() As DbSet(Of Employee)
-		Public Overridable Property Orders() As DbSet(Of Order)
+        Public Overridable Property Employees As DbSet(Of Employee)
 
-		Protected Overrides Sub OnModelCreating(ByVal modelBuilder As DbModelBuilder)
+        Public Overridable Property Orders As DbSet(Of Order)
 
-		End Sub
-	End Class
+        Protected Overrides Sub OnModelCreating(ByVal modelBuilder As DbModelBuilder)
+        End Sub
+    End Class
 End Namespace

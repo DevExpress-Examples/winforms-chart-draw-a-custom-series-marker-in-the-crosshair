@@ -1,23 +1,22 @@
-﻿Imports DevExpress.XtraEditors
+Imports DevExpress.XtraEditors
 Imports System
-Imports System.Collections.Generic
-Imports System.Linq
-Imports System.Threading.Tasks
 Imports System.Windows.Forms
 
 Namespace CustomDrawCrosshairSample
-	Friend Module Program
-		''' <summary>
-		''' The main entry point for the application.
-		''' </summary>
-		<STAThread>
-		Sub Main()
-			WindowsFormsSettings.SetDPIAware()
-			WindowsFormsSettings.AllowDpiScale = True
-			WindowsFormsSettings.AllowAutoScale = DevExpress.Utils.DefaultBoolean.True
-			Application.EnableVisualStyles()
-			Application.SetCompatibleTextRenderingDefault(False)
-			Application.Run(New Form1())
-		End Sub
-	End Module
+
+    Friend Module Program
+
+        ''' <summary>
+        ''' The main entry point for the application.
+        ''' </summary>
+        <STAThread>
+        Sub Main()
+            Call WindowsFormsSettings.SetDPIAware()
+            WindowsFormsSettings.AllowDpiScale = True
+            WindowsFormsSettings.AllowAutoScale = DevExpress.Utils.DefaultBoolean.True
+            Call Application.EnableVisualStyles()
+            Application.SetCompatibleTextRenderingDefault(False)
+            Call Application.Run(New Form1())
+        End Sub
+    End Module
 End Namespace
