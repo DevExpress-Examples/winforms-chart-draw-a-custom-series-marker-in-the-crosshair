@@ -7,11 +7,11 @@
 
 # Chart for WinForms - Draw a Custom Series Marker in the Crosshair
 
-This example demonstrates how to use the [CustomDrawCrosshair](https://docs.devexpress.com/WindowsForms/DevExpress.XtraCharts.ChartControl.CustomDrawCrosshair?v=22.2&p=netframework) event to modify the legend markers of bar series.
+This example demonstrates how to use the [CustomDrawCrosshair](https://docs.devexpress.com/WindowsForms/DevExpress.XtraCharts.ChartControl.CustomDrawCrosshair) event to modify the legend markers of bar series.
 
 ![Chart](./image/Chart.png)
 
-To access crosshair element groups, use the&nbsp;<a href="https://documentation.devexpress.com/#CoreLibraries/DevExpressXtraChartsCustomDrawCrosshairEventArgs_CrosshairElementGroupstopic">CustomDrawCrosshairEventArgs.CrosshairElementGroups</a>&nbsp;property. Elements&nbsp;are divided into several groups when crosshair labels are displayed for each pane. Use the following properties to access crosshair elements and customize them:
+To access crosshair element groups, use the [CustomDrawCrosshairEventArgs.CrosshairElementGroups](https://docs.devexpress.com/CoreLibraries/DevExpress.XtraCharts.CustomDrawCrosshairEventArgs.CrosshairElementGroups) property. Elements are divided into several groups when crosshair labels are displayed for each pane. Use the following properties to access crosshair elements and customize them:
 
 - [HeaderElement](https://docs.devexpress.com/CoreLibraries/DevExpress.XtraCharts.CrosshairElementGroup.HeaderElement) 
 - [CrosshairElements](https://docs.devexpress.com/CoreLibraries/DevExpress.XtraCharts.CrosshairElementGroup.CrosshairElements)
@@ -26,7 +26,7 @@ To access crosshair element groups, use the&nbsp;<a href="https://documentation.
 
 ## Documentation
 
-[Tooltip and Crosshair Cursor](https://docs.devexpress.com/WindowsForms/11976/controls-and-libraries/chart-control/end-user-features/tooltip-and-crosshair-cursor?p=netframework)
+[Tooltip and Crosshair Cursor](https://docs.devexpress.com/WindowsForms/11976/controls-and-libraries/chart-control/end-user-features/tooltip-and-crosshair-cursor)
 
 
 
